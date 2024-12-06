@@ -1,0 +1,12 @@
+{
+  "name": "canvasbuilder",
+  "private": true,
+  "scripts": {
+    "dev": "bun dev",
+    "build": "bun build"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ]
+}

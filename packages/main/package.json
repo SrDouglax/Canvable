@@ -1,0 +1,33 @@
+{
+  "name": "@jiant/canvable",
+  "version": "0.0.2",
+  "description": "A tool for building canvas apps",
+  "main": "./dist/main.js",
+  "module": "./dist/main.mjs",
+  "types": "./dist/main.d.ts",
+  "type": "commonjs",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "dependencies": {
+    "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "tsup": "^8.3.5"
+  },
+  "keywords": [
+    "canvas",
+    "graphics",
+    "drawing",
+    "visualization"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
