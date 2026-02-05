@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
-import { Vector2D } from "../classes/Vector2D";
-import { Scene } from "./Scene";
+import { Vector2D } from "../../classes/Vector2D";
+import { Scene } from "../Scene";
+import type { BoundingBox } from "../boundingBox/BoundingBox";
 
 export interface NodeConfig {
   id?: string;
@@ -15,6 +16,10 @@ export class Node {
   public children: Node[] = [];
 
   scene?: Scene;
+  boundingBox?: BoundingBox;
+
+  update?(dt: number): void;
+  draw?(ctx: CanvasRenderingContext2D, selected?: boolean): void;
 
   constructor(scene?: Scene, config?: NodeConfig) {
     this.scene = scene;

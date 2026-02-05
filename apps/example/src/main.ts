@@ -12,7 +12,7 @@ scene.addObject(c);
 
 canvas.style.backgroundColor = "black";
 
-scene.gameLoop((_dt: number, total: number) => {
+scene.run((_dt: number, total: number) => {
   if (scene.inputManager.justPressed("Enter")) {
     console.log(scene);
   }
@@ -20,7 +20,7 @@ scene.gameLoop((_dt: number, total: number) => {
   c.pos.x = Math.sin(total) * 100 + 200;
 
   // console.log(c.boundingBox.pos, scene.inputManager.mousePos);
-  if (c.boundingBox.isPointInside(scene.inputManager.mousePos)) {
+  if (c.boundingBox && c.boundingBox.isPointInside(scene.inputManager.mousePos)) {
     c.size = 199;
   } else {
     c.size = 10;

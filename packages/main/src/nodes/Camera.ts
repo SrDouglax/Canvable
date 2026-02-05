@@ -1,5 +1,5 @@
 import { Vector2D } from "../main";
-import { Node } from "./Node";
+import { Node } from "./shapes/Node";
 
 export class Camera extends Node {
   zoom: number;

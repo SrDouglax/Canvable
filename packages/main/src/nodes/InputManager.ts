@@ -1,5 +1,5 @@
 import { Vector2D } from "../main";
-import { Node } from "./Node";
+import { Node } from "./shapes/Node";
 
 export class InputManager extends Node {
   private keyState: Map<string, boolean> = new Map();
@@ -26,7 +26,7 @@ export class InputManager extends Node {
   }
 
   private handleKeyDown(event: KeyboardEvent) {
-    const key = event.key;
+    const key = event.code;
     if (!this.keyState.get(key)) {
       this.keyState.set(key, true);
       this.keyJustPressed.add(key);
@@ -34,7 +34,7 @@ export class InputManager extends Node {
   }
 
   private handleKeyUp(event: KeyboardEvent) {
-    const key = event.key;
+    const key = event.code;
     this.keyState.set(key, false);
     this.keyJustPressed.delete(key);
   }

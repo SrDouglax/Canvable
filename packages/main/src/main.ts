@@ -1,11 +1,15 @@
 export * from "./classes/Vector2D";
 export * from "./constants";
-export * from "./nodes/BoundingBox";
+export * from "./nodes/boundingBox/BoundingBox";
+export * from "./nodes/boundingBox/CircleBoundingBox";
+export * from "./nodes/boundingBox/SquareBoundingBox";
 export * from "./nodes/Camera";
-export * from "./nodes/Circle";
-export * from "./nodes/CircleBoundingBox";
-export * from "./nodes/Node";
+export * from "./nodes/physics/KinematicBody";
+export * from "./nodes/physics/StaticBody";
 export * from "./nodes/Scene";
+export * from "./nodes/shapes/Circle";
+export * from "./nodes/shapes/Node";
+export * from "./nodes/shapes/Square";
 
 export function getCanvas(id: string): HTMLCanvasElement {
   const canvas = document.getElementById(id) as HTMLCanvasElement;

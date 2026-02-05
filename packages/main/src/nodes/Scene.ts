@@ -1,6 +1,6 @@
 import { Camera } from "./Camera";
 import { InputManager } from "./InputManager";
-import { Node } from "./Node";
+import { Node } from "./shapes/Node";
 
 export interface SceneOptions {
   camera?: Camera;
@@ -19,6 +19,8 @@ export class Scene extends Node {
   camera: Camera;
   inputManager: InputManager;
   ctx: CanvasRenderingContext2D;
+  private animationFrameId: number | null = null;
+  private running: boolean = false;
   private lastTime: number = 0;
   private totalTime: number = 0;
 
@@ -49,7 +51,7 @@ export class Scene extends Node {
     canvas.height = height;
   }
 
-  update(deltaTime: number): void {
+  updateFrame(deltaTime: number): void {
     // Update camera and objects if needed
     this.camera.update(deltaTime);
     this.children.forEach((child) => {
@@ -59,18 +61,25 @@ export class Scene extends Node {
     });
   }
 
-  draw(ctx: CanvasRenderingContext2D): void {
+  drawFrame(ctx: CanvasRenderingContext2D): void {
     ctx.fillStyle = ctx.canvas.style.backgroundColor || "black";
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+    ctx.save();
+    ctx.translate(ctx.canvas.width / 2, ctx.canvas.height / 2);
 
     this.children.forEach((child) => {
       if (isDrawable(child)) {
         child.draw(ctx);
       }
     });
+
+    ctx.restore();
   }
 
-  gameLoop(callback?: (deltaTime: number, totalTime: number) => void, targetFPS: number = 60) {
+  run(callback?: (deltaTime: number, totalTime: number) => void, targetFPS: number = 60) {
+    this.running = true;
+
     const frameInterval = 1000 / targetFPS;
     let lastFrameTime = 0;
 
@@ -84,8 +93,8 @@ export class Scene extends Node {
           this.totalTime += deltaTime;
           lastFrameTime = currentTime - (elapsed % frameInterval);
 
-          this.update(deltaTime);
-          this.draw(this.ctx);
+          this.updateFrame(deltaTime);
+          this.drawFrame(this.ctx);
 
           if (callback) {
             callback(deltaTime, this.totalTime);
@@ -100,7 +109,15 @@ export class Scene extends Node {
     };
 
     this.lastTime = performance.now();
-    requestAnimationFrame(loop);
+    this.animationFrameId = requestAnimationFrame(loop);
+  }
+
+  stop() {
+    if (this.animationFrameId) {
+      cancelAnimationFrame(this.animationFrameId);
+      this.animationFrameId = null;
+    }
+    this.running = false;
   }
 }
 
