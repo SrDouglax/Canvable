@@ -12,7 +12,7 @@ scene.addObject(c);
 
 canvas.style.backgroundColor = "black";
 
-scene.gameLoop((dt, total) => {
+scene.gameLoop((_dt: number, total: number) => {
   if (scene.inputManager.justPressed("Enter")) {
     console.log(scene);
   }

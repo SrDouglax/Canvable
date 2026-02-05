@@ -60,7 +60,7 @@ export class Scene extends Node {
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
-    ctx.fillStyle = ctx.canvas.style.backgroundColor;
+    ctx.fillStyle = ctx.canvas.style.backgroundColor || "black";
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
     this.children.forEach((child) => {

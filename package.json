@@ -2,8 +2,10 @@
   "name": "canvasbuilder",
   "private": true,
   "scripts": {
-    "dev": "bun dev",
-    "build": "bun build"
+    "dev": "bun --filter example dev",
+    "dev:core": "bun --filter @jiant/canvable dev",
+    "dev:app": "bun --filter example dev",
+    "build": "bun --filter '*' build"
   },
   "workspaces": [
     "packages/*",

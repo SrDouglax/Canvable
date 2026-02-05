@@ -1,12 +1,14 @@
 import "./style.css";
 
-import { Vector2D } from "../src/classes/Vector2D";
-import { Circle } from "../src/nodes/Circle";
 import { getCanvas } from "../src/main";
+import { Circle } from "../src/nodes/Circle";
+import { Scene } from "../src/nodes/Scene";
 
-getCanvas("app");
+const canvas = getCanvas("app");
+const ctx = canvas.getContext("2d")!;
 
-const objects: any[] = [];
+const scene = new Scene(ctx);
+scene.addObject(new Circle());
 
-objects.push(new Circle());
+scene.gameLoop();
 

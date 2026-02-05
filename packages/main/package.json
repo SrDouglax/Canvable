@@ -12,14 +12,17 @@
   ],
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch"
+    "watch": "tsup --watch",
+    "dev": "vite"
   },
   "dependencies": {
     "uuid": "^11.0.3"
   },
   "devDependencies": {
+    "@types/node": "^25.2.0",
+    "tsup": "^8.3.5",
     "typescript": "^5.7.2",
-    "tsup": "^8.3.5"
+    "vite": "^7.3.1"
   },
   "keywords": [
     "canvas",
