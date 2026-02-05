@@ -24,35 +24,55 @@ yarn add @jiant/canvable
 
 ### Criando uma Cena
 
+### Criando uma Cena
+
 A seguir está um exemplo básico de como criar uma cena e adicionar um objeto nela:
 
 ```typescript
-import { Circle, getCanvas, Scene } from "@jiant/canvable";
-import "./style.css";
+import { Scene, Square, Vector2D, getCanvas, KinematicBody } from "@jiant/canvable";
 
 // Obtendo o canvas
-const canvas = getCanvas("app")!;
+const canvas = getCanvas("app");
 const ctx = canvas.getContext("2d")!;
 
 // Criando a cena
 const scene = new Scene(ctx);
 
-// Criando um círculo
-const circle = new Circle();
+// Criando um objeto (Quadrado)
+const player = new Square(scene, {
+  size: new Vector2D(50, 50),
+  startsWithBoundingBox: true, // Adicionar colisão automaticamente
+});
+player.pos = new Vector2D(100, 100);
+player.style.fillStyle = "#00FF00"; // Cor customizada
 
-// Adicionando o círculo à cena
-scene.addObject(circle);
-```
+// Adicionando física (Corpo Kinemático)
+const body = new KinematicBody(scene, player, {
+  speed: 1000,
+  friction: 0.9,
+});
+scene.addObject(body);
 
-### Loop de Jogo
-
-Você pode adicionar um loop de jogo para atualizar e mover os objetos da cena:
-
-```typescript
-scene.gameLoop((deltaTime, total) => {
-  circle.pos.x = Math.sin(total) * 100 + 200;
+// Iniciando o loop
+scene.run((deltaTime) => {
+  // Movimento simples
+  if (scene.inputManager.isPressed("ArrowRight")) {
+    body.applyForce(1000 * deltaTime, 0, deltaTime);
+  }
 });
 ```
+
+### Playground Interativo
+
+O pacote inclui um exemplo completo de "Playground de Física" com:
+
+- Controle de personagem (WASD + Setas)
+- Sprint (Shift)
+- Colisões e Física
+- Câmera que segue o jogador
+- Geração procedural de nível
+
+Você pode conferir o código fonte em `example/index.ts` ou rodar localmente com `npm run dev`.
 
 ---
 

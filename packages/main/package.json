@@ -1,6 +1,6 @@
 {
   "name": "@jiant/canvable",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A tool for building canvas apps",
   "main": "./dist/main.js",
   "module": "./dist/main.mjs",
